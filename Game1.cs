@@ -78,13 +78,19 @@ namespace Monogame_Basic_Top_Down
                 pacRect.X -= pacSpeed;
                 if (pacRect.Intersects(thwompRect))
                     pacRect.X += pacSpeed;
+                else if (pacRect.Right < 0)
+                    pacRect.X = _graphics.PreferredBackBufferWidth;
+                
                 currentPacTexture = pacLeftTexture;
+
             }
             if (state.IsKeyDown(Keys.Right))
             {
                 pacRect.X += pacSpeed;
                 if (pacRect.Intersects(thwompRect))
                     pacRect.X -= pacSpeed;
+                else if (pacRect.Left > _graphics.PreferredBackBufferWidth)
+                    pacRect.X = -pacRect.Width;
 
                 currentPacTexture = pacRightTexture;
             }
@@ -93,6 +99,8 @@ namespace Monogame_Basic_Top_Down
                 pacRect.Y -= pacSpeed;
                 if (pacRect.Intersects(thwompRect))
                     pacRect.Y += pacSpeed;
+                else if (pacRect.Top < -pacRect.Height)
+                    pacRect.Y = _graphics.PreferredBackBufferHeight;
                 currentPacTexture = pacUpTexture;
             }
             if (state.IsKeyDown(Keys.Down))
@@ -100,6 +108,8 @@ namespace Monogame_Basic_Top_Down
                 pacRect.Y += pacSpeed;
                 if (pacRect.Intersects(thwompRect))
                     pacRect.Y -= pacSpeed;
+                else if (pacRect.Top > _graphics.PreferredBackBufferHeight)
+                    pacRect.Y = -pacRect.Height;
                 currentPacTexture = pacDownTexture;
             }
 
